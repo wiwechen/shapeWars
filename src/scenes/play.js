@@ -22,15 +22,21 @@ class Play extends Phaser.Scene {
     create() {
       this.add.text(20, 20, "Shape Wars Play");
       cursors = this.input.keyboard.createCursorKeys();
-      this.square = new blueSquare(this, centerX, centerY, 'bSquare', 'l0_sprite_square01');
+      this.square = new blueSquare(this, centerX, centerY*1.8, 'bSquare', 'l0_sprite_square01');
       this.square.play("beat");
+
+      //KeyConfigure
+      keyLEFT = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.LEFT);
+      keyRIGHT = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.RIGHT);
     }
 
 
 
     update(){
+      this.square.update();
       if(Phaser.Input.Keyboard.JustDown(cursors.shift)){
         this.scene.start('menuScene');
     }
+      
     }
   }

@@ -63,3 +63,4 @@ let centerY = game.config.height/2;
 let w = game.config.width;
 let h = game.config.height;
 let cursors;
+let keyLEFT, keyRIGHT, keyDOWN, keyUP, keySHIFT;
