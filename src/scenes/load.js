@@ -24,8 +24,11 @@ class Load extends Phaser.Scene{
         //beta square
         this.load.image('betaSquare', 'blueSquare/l0_sprite_square12.png');
         //real square
-        //this.load.atlas('blueSquare', 'blueSquare/blueSquareSheet.png', 'blueSquare/blueSquare.json');
         this.load.atlas('bSquare', 'blueSquare/blueSquareSheet.png', 'blueSquare/trueBlueSquare.json');
+        //triangle
+        this.load.image('rTriangle', 'redTriangle/redTriangleL.PNG');
+        this.load.image('rTriangle2', 'redTriangle/redTriangleM.PNG');
+        this.load.image('rTriangle3', 'redTriangle/redTriangleS.PNG');
         
 
     }

@@ -24,6 +24,9 @@ class Play extends Phaser.Scene {
       cursors = this.input.keyboard.createCursorKeys();
       this.square = new blueSquare(this, centerX, centerY*1.8, 'bSquare', 'l0_sprite_square01');
       this.square.play("beat");
+      this.triangle01= new redTriangle(this, centerX, centerY, 'rTriangle');
+      this.triangle02= new redTriangle(this, centerX/3, centerY, 'rTriangle');
+      this.triangle03 = new redTriangle(this, centerX+(2*(centerX/3)), centerY, 'rTriangle');
 
       //KeyConfigure
       keyLEFT = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.LEFT);
