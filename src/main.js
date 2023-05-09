@@ -54,7 +54,7 @@ let config = {
     scale: {
         autoCenter: Phaser.Scale.CENTER_BOTH
     },
-    scene: [Load, Menu, Play]
+    scene: [Load, Menu, Credits, Play]
 }
 let game = new Phaser.Game(config);
 
@@ -64,3 +64,5 @@ let w = game.config.width;
 let h = game.config.height;
 let cursors;
 let keyLEFT, keyRIGHT, keyDOWN, keyUP, keySHIFT;
+console.log("centerX: "+centerX);
+console.log("centerY: "+centerY);
