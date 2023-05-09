@@ -49,11 +49,17 @@
 */
 let config = {
     type: Phaser.CANVAS,
-    width: 1080,
+    width: 480,
     height: 720,
     scale: {
         autoCenter: Phaser.Scale.CENTER_BOTH
     },
-    scene: [Menu]
+    scene: [Load, Menu, Play]
 }
 let game = new Phaser.Game(config);
+
+let centerX = game.config.width/2;
+let centerY = game.config.height/2;
+let w = game.config.width;
+let h = game.config.height;
+let cursors;

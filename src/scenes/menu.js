@@ -3,6 +3,7 @@ class Menu extends Phaser.Scene {
         super("menuScene");
     }
 
+
     create(){
         let menuConfig = {
             fontFamily: 'Copperplate',
@@ -17,6 +18,15 @@ class Menu extends Phaser.Scene {
             fixedWidth: 0
            }
 
-        this.add.text(540,360, "Shape Wars Menu", menuConfig).setOrigin(0.5);
+        this.add.text(centerX,centerY, "Shape Wars Menu", menuConfig).setOrigin(0.5);
+        this.add.text(centerX,centerY+80, "Click -> to start", menuConfig).setOrigin(0.5);
+        cursors = this.input.keyboard.createCursorKeys();
+    }
+
+    update(){
+        if(Phaser.Input.Keyboard.JustDown(cursors.right)){
+            this.scene.start('playScene');
+        }
+
     }
 }
