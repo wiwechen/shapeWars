@@ -17,13 +17,23 @@ class Play extends Phaser.Scene {
           }),
           repeat: -1
       });
+
+
+
   }
   //
     create() {
       this.add.text(20, 20, "Shape Wars Play");
       cursors = this.input.keyboard.createCursorKeys();
-      this.square = new blueSquare(this, centerX, centerY*1.8, 'bSquare', 'l0_sprite_square01');
-      this.square.play("beat");
+      
+      this.square = new blueSquare(this, centerX, centerY*1.8, 'bSquare', 'l0_sprite_square01').setOrigin(0.5);
+
+      this.square.setScale(4);
+      this.square.play("beat"); 
+
+      
+
+
       this.triangle01= new redTriangle(this, centerX, centerY, 'rTriangle');
       this.triangle02= new redTriangle(this, centerX/3, centerY, 'rTriangle');
       this.triangle03 = new redTriangle(this, centerX+(2*(centerX/3)), centerY, 'rTriangle');
