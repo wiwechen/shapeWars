@@ -3,7 +3,7 @@ class blueSquare extends Phaser.GameObjects.Sprite{
         super(scene, x, y , texture, frame);
 
         scene.add.existing(this);
-        this.moveSpeed = 2;
+        this.moveSpeed = 6;
         //cursors = this.input.keyboard.createCursorKeys();
 
     }
@@ -13,7 +13,7 @@ class blueSquare extends Phaser.GameObjects.Sprite{
             
             this.x -= this.moveSpeed;
             
-        }else if(keyRIGHT.isDown && this.x<=game.config.width-this.width){
+        }else if(keyRIGHT.isDown && this.x<=game.config.width-25){
             this.x += this.moveSpeed;
 
 

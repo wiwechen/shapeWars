@@ -21,8 +21,7 @@ class Load extends Phaser.Scene{
 
         this.load.path = './assets/';
         console.log('assets path has been set');
-        //beta square
-        this.load.image('betaSquare', 'blueSquare/l0_sprite_square12.png');
+
         //real square
         this.load.atlas('bSquare', 'blueSquare/blueSquareSheet.png', 'blueSquare/trueBlueSquare.json');
 

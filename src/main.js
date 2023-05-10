@@ -54,6 +54,16 @@ let config = {
     scale: {
         autoCenter: Phaser.Scale.CENTER_BOTH
     },
+    physics: {
+        default: 'arcade',
+        arcade: {
+            //debug: true,
+            gravity: {
+                x: 0,
+                y: 0
+            }
+        }
+    },
     scene: [Load, Menu, Credits, Play]
 }
 let game = new Phaser.Game(config);
@@ -64,5 +74,6 @@ let w = game.config.width;
 let h = game.config.height;
 let cursors;
 let keyLEFT, keyRIGHT, keyDOWN, keyUP, keySHIFT;
+let coordX = [centerX, centerX/3, centerX+(2*(centerX/3))];
 console.log("centerX: "+centerX);
 console.log("centerY: "+centerY);
