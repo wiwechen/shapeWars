@@ -7,6 +7,8 @@ class redTriangle2 extends Phaser.Physics.Arcade.Sprite{
         this.parentScene.physics.add.existing(this);
         this.setVelocityY(velocity);
         this.setImmovable();
+        this.setDepth(1);
+        this.setBounce(1,1);
         this.newTriangle = true;
 
     }
@@ -14,7 +16,7 @@ class redTriangle2 extends Phaser.Physics.Arcade.Sprite{
     update(){
 
         if(this.newTriangle && this.y > centerY){
-            console.log("the if is triggered");
+            //console.log("the if is triggered");
             this.parentScene.addTriangle(this.parent, this.velocity);
             this.newTriangle = false;
         }

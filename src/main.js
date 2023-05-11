@@ -38,6 +38,9 @@
  * 
  * 
  * Sources:
+ * fix collison box: https://youtu.be/7rcw_9Bqso0
+ * spritesheet/json creation: https://www.leshylabs.com/apps/sstool/
+ * 
  * 
  * 
  * 
@@ -57,7 +60,7 @@ let config = {
     physics: {
         default: 'arcade',
         arcade: {
-            //debug: true,
+            debug: true,
             gravity: {
                 x: 0,
                 y: 0
@@ -75,5 +78,7 @@ let h = game.config.height;
 let cursors;
 let keyLEFT, keyRIGHT, keyDOWN, keyUP, keySHIFT;
 let coordX = [centerX, centerX/3, centerX+(2*(centerX/3))];
+const squareVelocity = 50;
 console.log("centerX: "+centerX);
 console.log("centerY: "+centerY);
+let square = null;

@@ -7,7 +7,7 @@ class Play extends Phaser.Scene {
       this.anims.create({
           key: 'beat',
           frameRate: 12,
-          frames: this.anims.generateFrameNames("bSquare", {
+          frames: this.anims.generateFrameNames("bSquare2", {
               prefix: "l0_sprite_square0",
               //suffix: ".png",
               start: 1,
@@ -26,12 +26,36 @@ class Play extends Phaser.Scene {
       this.add.text(20, 20, "Shape Wars Play");
       cursors = this.input.keyboard.createCursorKeys();
 
-      this.triangleSpeed = 250
-      
+      this.triangleSpeed = 250;
+      /*
       this.square = new blueSquare(this, centerX, centerY*1.8, 'bSquare', 'l0_sprite_square01');
 
       this.square.setScale(4);
-      this.square.play("beat"); 
+      this.square.play("beat");
+*/
+      /*2nd Way of creating blue Square
+      this.newSquare = new blueSquare2(this, 200);
+      this.newSquare.setScale(4);
+      this.newSquare.play("beat");
+      */
+
+      //3rd way of Creating blue Square
+      square = this.physics.add.sprite(centerX, centerY*1.8, 'bSquare2', 'l0_sprite_square01').setOrigin(0.5);
+      square.play("beat");
+      square.setScale(4);
+      square.setCollideWorldBounds(true);
+      square.setImmovable();
+      square.setMaxVelocity(600, 600);
+      square.setDragX(50);
+      
+
+      square.setDepth(1);
+      square.destroyed = false;
+      
+
+      
+
+
 
       
 
@@ -51,6 +75,12 @@ class Play extends Phaser.Scene {
         this.addTriangle();
       });
 
+      //Colliders
+
+      //
+
+   
+
 
 
       //KeyConfigure
@@ -67,10 +97,36 @@ class Play extends Phaser.Scene {
 
 
     update(){
-      this.square.update();
+      //this.square.update();
+      //this.newSquare.update();
+      //square.body.offset.x = 0;
+      //square.body.offset.y = 0;
+      //square.body.width = square.width;
+      //square.body.height = square.height;
+      //square.body.setSize(square.width, square.height, 0, 0, true);
       if(Phaser.Input.Keyboard.JustDown(cursors.shift)){
         this.scene.start('menuScene');
-    }
+      }
+      if(!square.destroyed){
+        if(keyLEFT.isDown){
+          console.log("trigger");
+          square.body.velocity.x -= squareVelocity;
+        }else if(keyRIGHT.isDown){
+          square.body.velocity.x += squareVelocity;
+        }
+
+        this.physics.world.collide(square, this.triangleGroup, this.squareCollison, null, this);
+
+
+      }
+
       
     }
+
+    squareCollison(){
+      square.destroyed = true;
+      square.destroy();
+      this.scene.start('creditsScene');
+    }
+
   }
