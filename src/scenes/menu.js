@@ -22,6 +22,8 @@ class Menu extends Phaser.Scene {
         this.add.text(centerX,centerY+80, "Click -> to start", menuConfig).setOrigin(0.5);
         this.add.text(centerX,centerY+140, "Click <- to see credits", menuConfig).setOrigin(0.5);
         cursors = this.input.keyboard.createCursorKeys();
+
+        
         
     }
 

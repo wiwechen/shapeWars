@@ -43,7 +43,7 @@
  * Making bullets youtube vide tutorial: https://youtu.be/9wvlAzKseCo
  * bullet in phaser example: https://labs.phaser.io/view.html?src=src/pools/bullets.js&v=dev
  * the line above this one's source code: https://github.com/photonstorm/phaser3-examples/blob/master/public/src/pools/bullets.js
- * 
+ * bullet collison: https://youtu.be/hkedWHfU_oQ
  * 
  * 
  * 
@@ -87,3 +87,4 @@ const squareVelocity = 50;
 console.log("centerX: "+centerX);
 console.log("centerY: "+centerY);
 let square = null;
+let bar = null;

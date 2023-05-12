@@ -16,14 +16,14 @@ class redTriangle2 extends Phaser.Physics.Arcade.Sprite{
     update(time, delta){
 
         if(this.newTriangle && this.y > centerY){
-            //console.log("the if is triggered");
+            console.log("time is: "+time);
             this.parentScene.addTriangle(this.parent, this.velocity);
             this.newTriangle = false;
         }
 
-        if(this.y < this.height){
-            this.destroy();
-        }
+        // if(this.y < this.height){
+        //     this.destroy();
+        // }
         
     }
 }
