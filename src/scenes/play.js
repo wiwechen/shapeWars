@@ -29,8 +29,11 @@ class Play extends Phaser.Scene {
       this.triangleSpeed = 250;
       this.bulletSpeed = 200;
 
+      this.bulletAmmount = 10;
+
       //Creating blue Square
       square = this.physics.add.sprite(centerX, centerY*1.8, 'bSquare2', 'l0_sprite_square01').setOrigin(0.5);
+      console.log("CenterY*1.8 = " + centerY*1.8 + ", CenterY*2.0 = "+ centerY*1.5);
       square.play("beat");
       square.setScale(4);
       square.setCollideWorldBounds(true);
@@ -40,10 +43,14 @@ class Play extends Phaser.Scene {
       square.setDepth(1);
       square.destroyed = false;
 
-      //create Bullet Group
-      this.bulletGroup = this.add.group({
-        runChildUpdate: true
-      });
+      // //create Bullet Group
+      // this.bulletGroup = this.add.group({
+      //   runChildUpdate: true
+      // });
+
+      //bullet code(I hope this f*cking works)
+      this.bulletGroup = new bulletGroup(this);
+      this.lastFired = 0;
 
 
 
@@ -63,9 +70,9 @@ class Play extends Phaser.Scene {
         this.addTriangle();
       });
 
-      this.time.delayedCall(2500, ()=>{
-        this.addBullet();
-      })
+      // this.time.delayedCall(2500, ()=>{
+      //   this.addBullet();
+      // })
 
       //Colliders
 
@@ -87,30 +94,30 @@ class Play extends Phaser.Scene {
       this.triangleGroup.add(triangle);
     }
 
-    addBullet(){
-      let bullet = new blueSquare2(this, square.x, square.y, this.bulletSpeed);
-      this.bulletGroup.add(bullet);
+    // addBullet(){
+    //   let bullet = new blueSquare2(this, square.x, square.y, this.bulletSpeed);
+    //   this.bulletGroup.add(bullet);
+    // }
+
+    shootBullet(){
+      this.bulletGroup.fireBullet(square.x, square.y-20);
     }
 
 
 
-    update(){
-      //this.square.update();
-      //this.newSquare.update();
-      //square.body.offset.x = 0;
-      //square.body.offset.y = 0;
-      //square.body.width = square.width;
-      //square.body.height = square.height;
-      //square.body.setSize(square.width, square.height, 0, 0, true);
+    update(time, delta){
       if(Phaser.Input.Keyboard.JustDown(cursors.shift)){
         this.scene.start('menuScene');
       }
       if(!square.destroyed){
         if(keyLEFT.isDown){
-          console.log("trigger");
           square.body.velocity.x -= squareVelocity;
         }else if(keyRIGHT.isDown){
           square.body.velocity.x += squareVelocity;
+        }else if(keyUP.isDown && time > this.lastFired){
+          this.shootBullet();
+          this.lastFired = time + 100;
+          
         }
 
         this.physics.world.collide(square, this.triangleGroup, this.squareCollison, null, this);

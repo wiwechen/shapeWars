@@ -10,13 +10,12 @@ class blueSquare2 extends Phaser.Physics.Arcade.Sprite{
         this.setCollideWorldBounds(true);
         this.setDepth(1);
         //this.setBounce(1,1);
-        this.newBullet = true;
     }
 
     update(){
-        if(keyUP.isDown){
-            this.parentScene.addBullet(this.parent, this.velocity);
-        }
+        // if(keyUP.isDown){
+        //     this.parentScene.addBullet(this.parent, this.velocity);
+        // }
         
     }
 }
