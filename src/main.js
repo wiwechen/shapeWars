@@ -11,8 +11,8 @@
  * 
  * Bare Minimum Submission Points(e.g, git repo, playable link, Comment Header ) (15)
  * 
- * Use multiple Scene classes (dictated by your game's style) (5) [PROGRESS:75%]
- * Properly transition between Scenes and allow the player to restart w/out having to reload the page (5) [PROGRESS:I]
+ * Use multiple Scene classes (dictated by your game's style) (5) [PROGRESS: COMPLETE]
+ * Properly transition between Scenes and allow the player to restart w/out having to reload the page (5) [PROGRESS:COMPLETE]
  * Include in-game instructions using text or other means (e.g., tooltips, tutorial, diagram, etc.) (5) [PROGRESS:I]
  * Have some form of player input/control appropriate to your game design (5) [PROGRESS:Complete]
  * Include one or more animated characters that use a texture atlas (5) [PROGRESS: COMPLETE]
@@ -79,20 +79,27 @@ let config = {
             }
         }
     },
-    scene: [Load, Menu, Credits, Play]
+    scene: [Load, Menu, Credits, Play, gameOver]
 }
 let game = new Phaser.Game(config);
-
+//size variables
 let centerX = game.config.width/2;
 let centerY = game.config.height/2;
 let w = game.config.width;
 let h = game.config.height;
+//key inputs
 let cursors;
 let keyLEFT, keyRIGHT, keyDOWN, keyUP, keySHIFT;
+//array for respawn
 let coordX = [centerX, centerX/3, centerX+(2*(centerX/3))];
 const squareVelocity = 50;
 console.log("centerX: "+centerX);
 console.log("centerY: "+centerY);
+//object
 let square = null;
 let bar = null;
-let time = 0;
+//Score 
+let timer;
+let score;
+let hsScore = 0;
+

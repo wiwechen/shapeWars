@@ -27,11 +27,15 @@ class Play extends Phaser.Scene {
     cursors = this.input.keyboard.createCursorKeys();
 
     this.triangleSpeed = 350;
+    this.triangleMaxSpeed = 500;
+
+
     this.bulletSpeed = 200;
 
     this.bulletAmmount = 10;
 
     this.bulletUI = this.add.text(20, 20, "Bullets: " + this.bulletAmmount);
+
 
     //Creating blue Square
     square = this.physics.add.sprite(centerX, centerY*1.8, 'bSquare2', 'l0_sprite_square01').setOrigin(0.5);
@@ -40,7 +44,7 @@ class Play extends Phaser.Scene {
     square.setScale(3.5);
     square.setCollideWorldBounds(true);
     square.setImmovable();
-    square.setMaxVelocity(600, 600);
+    square.setMaxVelocity(600, 0);
     square.setDragX(50);
     square.setDepth(1);
     square.destroyed = false;
@@ -68,7 +72,7 @@ class Play extends Phaser.Scene {
       runChildUpdate: true
     });
 
-    //time before spawn set
+    //spawn first triangle
     this.addTriangle();
 
     //play bgm
@@ -80,8 +84,16 @@ class Play extends Phaser.Scene {
     });
     this.bgm.play();
     
-    
-
+    //time and score var sets
+    timer = 0;
+    score = 0;
+    this.timerStuff = this.time.addEvent({
+      delay: 1000,
+      callback: this.timeScore,
+      callbackScope: this,
+      loop: true
+    });
+    this.timeUI = this.add.text(380, 20, "Score: "+timer);
 
 
     //KeyConfigure
@@ -91,15 +103,11 @@ class Play extends Phaser.Scene {
   }
 
   addTriangle(){
-    let speedVariance =  50; 
+    let speedVariance =  Phaser.Math.Between(40, 50);; 
     let triangle = new redTriangle2(this, this.triangleSpeed - speedVariance);
     this.triangleGroup.add(triangle);
   }
 
-  // addBullet(){
-  //   let bullet = new blueSquare2(this, square.x, square.y, this.bulletSpeed);
-  //   this.bulletGroup.add(bullet);
-  // }
 
   shootBullet(){
     this.bulletGroup.fireBullet(square.x, square.y-20);
@@ -109,9 +117,7 @@ class Play extends Phaser.Scene {
 
   update(time, delta){
 
-    if(Phaser.Input.Keyboard.JustDown(cursors.shift)){
-      this.scene.start('menuScene');
-    }
+
     if(!square.destroyed){
       if(keyLEFT.isDown){
         square.body.velocity.x -= squareVelocity;
@@ -142,6 +148,9 @@ class Play extends Phaser.Scene {
         this.addTriangle();
       }
 
+      this.timeUI.text = "Score: "+timer;
+
+
       
 
 
@@ -156,8 +165,12 @@ class Play extends Phaser.Scene {
     square.destroyed = true;
     triangleGroup.destroy();
     square.destroy();
+    score = timer;
+    if(score>hsScore){
+      hsScore=score;
+    }
     this.time.delayedCall(1000, () => { 
-    this.scene.start('creditsScene');
+    this.scene.start('gameOverScene');
     });
     
     
@@ -171,6 +184,16 @@ class Play extends Phaser.Scene {
 
   barCrash(triangleGroup){
     triangleGroup.destroy();
+  }
+
+  timeScore(){
+    timer++;
+    if(timer%5 == 0){
+      if(this.triangleSpeed <= this.triangleMaxSpeed){
+        this.sound.play('uiSound', { volume: 0.5 });
+        this.triangleSpeed += 30;
+      }
+    }
   }
 
 
