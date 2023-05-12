@@ -23,13 +23,14 @@ class Play extends Phaser.Scene {
   }
   //
     create() {
-      this.add.text(20, 20, "Shape Wars Play");
+      this.bulletAmmount = 5;
+      this.bulletUI = this.add.text(20, 20, "Bullets: "+this.bulletAmmount);
       cursors = this.input.keyboard.createCursorKeys();
 
       this.triangleSpeed = 250;
       this.bulletSpeed = 200;
 
-      this.bulletAmmount = 10;
+
 
       //Creating blue Square
       square = this.physics.add.sprite(centerX, centerY*1.8, 'bSquare2', 'l0_sprite_square01').setOrigin(0.5);
@@ -75,6 +76,9 @@ class Play extends Phaser.Scene {
       // })
 
       //Colliders
+      
+
+
 
       //
 
@@ -86,18 +90,17 @@ class Play extends Phaser.Scene {
       keyLEFT = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.LEFT);
       keyRIGHT = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.RIGHT);
       keyUP = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.UP);
+
+      this.test = this.triangleGroup.getLength();
+      console.log(this.test);
     }
 
     addTriangle(){
       let speedVariance =  50; 
       let triangle = new redTriangle2(this, this.triangleSpeed - speedVariance);
-      this.triangleGroup.add(triangle);
+
     }
 
-    // addBullet(){
-    //   let bullet = new blueSquare2(this, square.x, square.y, this.bulletSpeed);
-    //   this.bulletGroup.add(bullet);
-    // }
 
     shootBullet(){
       this.bulletGroup.fireBullet(square.x, square.y-20);
@@ -106,6 +109,7 @@ class Play extends Phaser.Scene {
 
 
     update(time, delta){
+      
       if(Phaser.Input.Keyboard.JustDown(cursors.shift)){
         this.scene.start('menuScene');
       }
@@ -117,10 +121,21 @@ class Play extends Phaser.Scene {
         }else if(keyUP.isDown && time > this.lastFired){
           this.shootBullet();
           this.lastFired = time + 100;
+          this.bulletAmmount -= 1;
+          if(this.bulletAmmount>=0){ 
+            this.bulletUI.text = "Bullets: "+this.bulletAmmount
+          }
+          
+
           
         }
 
         this.physics.world.collide(square, this.triangleGroup, this.squareCollison, null, this);
+        
+        console.log(this.test);
+
+        this.physics.world.collide(this.triangleGroup, this.bulletGroup, this.triangleCollison, null, this);
+
 
 
       }
@@ -133,5 +148,12 @@ class Play extends Phaser.Scene {
       square.destroy();
       this.scene.start('creditsScene');
     }
+
+    triangleCollison(triangleGroup, bulletGroup,){
+      triangleGroup.destroy();
+      bulletGroup.destroy();
+    }
+
+
 
   }
