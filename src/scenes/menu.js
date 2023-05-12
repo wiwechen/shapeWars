@@ -29,9 +29,11 @@ class Menu extends Phaser.Scene {
 
     update(){
         if(Phaser.Input.Keyboard.JustDown(cursors.right)){
+            this.sound.play('uiSound', { volume: 0.5 });
             this.scene.start('playScene');
         }
         if(Phaser.Input.Keyboard.JustDown(cursors.left)){
+            this.sound.play('uiSound', { volume: 0.5 });
             this.scene.start('creditsScene')
         }
 

@@ -32,6 +32,12 @@ class Load extends Phaser.Scene{
         this.load.image('rTriangle', 'redTriangle/redTriangleLFinal.PNG');
         this.load.image('rTriangle2', 'redTriangle/redTriangleM.PNG');
         this.load.image('rTriangle3', 'redTriangle/redTriangleS.PNG');
+
+        //audio
+        this.load.audio('bgm', ['audio/Spazzmatica-Polka.mp3']);
+        this.load.audio('glassBreak', ['audio/221528__unfa__glass-break.mp3']);
+        this.load.audio('uiSound', ['audio/403015__inspectorj__ui-confirmation-alert-c2.wav']);
+        this.load.audio('fireAway', ['audio/466867__mikee63__blaster-shot-single-5.wav'])
         
 
     }

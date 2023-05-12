@@ -26,7 +26,7 @@ class Play extends Phaser.Scene {
     
     cursors = this.input.keyboard.createCursorKeys();
 
-    this.triangleSpeed = 250;
+    this.triangleSpeed = 350;
     this.bulletSpeed = 200;
 
     this.bulletAmmount = 10;
@@ -37,7 +37,7 @@ class Play extends Phaser.Scene {
     square = this.physics.add.sprite(centerX, centerY*1.8, 'bSquare2', 'l0_sprite_square01').setOrigin(0.5);
     console.log("CenterY*1.8 = " + centerY*1.8 + ", CenterY*2.0 = "+ centerY*1.5);
     square.play("beat");
-    square.setScale(4);
+    square.setScale(3.5);
     square.setCollideWorldBounds(true);
     square.setImmovable();
     square.setMaxVelocity(600, 600);
@@ -50,7 +50,7 @@ class Play extends Phaser.Scene {
     bar.setImmovable();
     bar.setDepth(1);
 
-    //bullet code(I hope this f*cking works)
+    //bullet code
     this.bulletGroup = new bulletGroup(this);
     this.lastFired = 0;
 
@@ -71,7 +71,14 @@ class Play extends Phaser.Scene {
     //time before spawn set
     this.addTriangle();
 
-    //force spawn code?
+    //play bgm
+    this.bgm = this.sound.add('bgm',{
+      mute: false,
+      volume: 0.5,
+      rate: 1,
+      loop: true
+    });
+    this.bgm.play();
     
     
 
@@ -101,6 +108,7 @@ class Play extends Phaser.Scene {
 
 
   update(time, delta){
+
     if(Phaser.Input.Keyboard.JustDown(cursors.shift)){
       this.scene.start('menuScene');
     }
@@ -110,12 +118,19 @@ class Play extends Phaser.Scene {
       }else if(keyRIGHT.isDown){
         square.body.velocity.x += squareVelocity;
       }else if(keyUP.isDown && time > this.lastFired){
+        this.sound.play('fireAway', { volume: 0.5 });
         this.shootBullet();
-        this.lastFired = time + 100;
+        this.lastFired = time + 500;
+        if(this.bulletAmmount > 0){
+          this.bulletAmmount -= 1;
+          this.bulletUI.text = "Bullets: " + this.bulletAmmount;
+
+        }
+        
         
       }
 
-      this.physics.world.collide(square, this.triangleGroup, this.squareCollison, null, this);
+      this.physics.world.collide(this.triangleGroup, square, this.squareCollison, null, this);
       this.physics.world.collide(this.triangleGroup, bar, this.barCrash, null, this);
       if(this.physics.world.collide(this.bulletGroup, this.triangleGroup, this.crash, null, this)){
         if(this.triangleGroup.getLength()==0){
@@ -135,14 +150,21 @@ class Play extends Phaser.Scene {
     
   }
 
-  squareCollison(){
+  squareCollison(triangleGroup){
+    this.sound.play('glassBreak', { volume: 0.5 });
+    this.bgm.stop();
     square.destroyed = true;
+    triangleGroup.destroy();
     square.destroy();
+    this.time.delayedCall(1000, () => { 
     this.scene.start('creditsScene');
-    //return true;
+    });
+    
+    
   }
 
   crash(triangleGroup,bulletGroup){
+    this.sound.play('glassBreak', { volume: 0.5 });
     triangleGroup.destroy();
     bulletGroup.destroy();
   }
