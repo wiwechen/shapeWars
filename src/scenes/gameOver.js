@@ -18,6 +18,9 @@ class gameOver extends Phaser.Scene {
             fixedWidth: 0
            }
 
+           this.grid = this.add.tileSprite(0, 0, 480, 720, 'grid').setOrigin(0, 0);
+           
+
            this.add.text(centerX,centerY, "Game Over. You lasted: "+score+"s", gameOverConfig).setOrigin(0.5);
            this.add.text(centerX,centerY+80, "High Score is: " +hsScore+"s", gameOverConfig).setOrigin(0.5);
            this.add.text(centerX,centerY+140, "Click UP to retry", gameOverConfig).setOrigin(0.5);

@@ -26,13 +26,20 @@ class Play extends Phaser.Scene {
     
     cursors = this.input.keyboard.createCursorKeys();
 
+    //background
+    this.grid = this.add.tileSprite(0, 0, 480, 720, 'grid').setOrigin(0, 0);
+
     this.triangleSpeed = 350;
     this.triangleMaxSpeed = 500;
+
+    tileScrollSpeed = 4;
 
 
     this.bulletSpeed = 200;
 
     this.bulletAmmount = 10;
+
+    this.add.rectangle(0, borderUISize - borderPadding - 80, w, borderUISize*2, 0x9c0d03).setOrigin(0,0);
 
     this.bulletUI = this.add.text(20, 20, "Bullets: " + this.bulletAmmount);
 
@@ -58,9 +65,6 @@ class Play extends Phaser.Scene {
     this.bulletGroup = new bulletGroup(this);
     this.lastFired = 0;
 
-
-
-
     //triangle codes
     this.triangle01= new redTriangle(this, centerX, centerY/3, 'rTriangle');
     this.triangle02= new redTriangle(this, centerX/3, centerY/3, 'rTriangle');
@@ -78,7 +82,7 @@ class Play extends Phaser.Scene {
     //play bgm
     this.bgm = this.sound.add('bgm',{
       mute: false,
-      volume: 0.5,
+      volume: 0.4,
       rate: 1,
       loop: true
     });
@@ -100,6 +104,8 @@ class Play extends Phaser.Scene {
     keyLEFT = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.LEFT);
     keyRIGHT = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.RIGHT);
     keyUP = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.UP);
+
+    
   }
 
   addTriangle(){
@@ -116,6 +122,8 @@ class Play extends Phaser.Scene {
 
 
   update(time, delta){
+    this.grid.tilePositionY -= tileScrollSpeed;
+
 
 
     if(!square.destroyed){
@@ -190,8 +198,9 @@ class Play extends Phaser.Scene {
     timer++;
     if(timer%5 == 0){
       if(this.triangleSpeed <= this.triangleMaxSpeed){
-        this.sound.play('uiSound', { volume: 0.5 });
+        this.sound.play('levelUp', { volume: 0.5 });
         this.triangleSpeed += 30;
+        tileScrollSpeed += 0.5;
       }
     }
   }

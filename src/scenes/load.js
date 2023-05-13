@@ -37,7 +37,11 @@ class Load extends Phaser.Scene{
         this.load.audio('bgm', ['audio/Spazzmatica-Polka.mp3']);
         this.load.audio('glassBreak', ['audio/221528__unfa__glass-break.mp3']);
         this.load.audio('uiSound', ['audio/403015__inspectorj__ui-confirmation-alert-c2.wav']);
-        this.load.audio('fireAway', ['audio/466867__mikee63__blaster-shot-single-5.wav'])
+        this.load.audio('fireAway', ['audio/466867__mikee63__blaster-shot-single-5.wav']);
+        this.load.audio('levelUp', ['audio/464908__plasterbrain__8bit-powerup.flac']);
+
+        //grid background
+        this.load.image('grid', 'grid.jpg')
         
 
     }
