@@ -29,7 +29,7 @@ class Load extends Phaser.Scene{
         this.load.image('bar', 'purpleBar.png')
 
         //triangle
-        this.load.image('rTriangle', 'redTriangle/redTriangleLFinal.PNG');
+        this.load.image('rTriangle', 'redTriangle/redTriangleLFinal.png');
         this.load.image('rTriangle2', 'redTriangle/redTriangleM.PNG');
         this.load.image('rTriangle3', 'redTriangle/redTriangleS.PNG');
 
