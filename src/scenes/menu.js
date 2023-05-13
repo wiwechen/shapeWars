@@ -28,15 +28,17 @@ class Menu extends Phaser.Scene {
         menuConfig.fontSize = '28px';
 
         
-        this.add.text(centerX,centerY+120, "Click -> to start", menuConfig).setOrigin(0.5);
+        this.add.text(centerX,centerY+140, "Click -> to start", menuConfig).setOrigin(0.5);
         this.add.text(centerX,centerY+180, "Click <- to see credits", menuConfig).setOrigin(0.5);
 
         menuConfig.fontSize = '20px';
         menuConfig.backgroundColor = '#820fa8';
-        this.add.text(centerX,centerY-150, "Click <- and -> to move", menuConfig).setOrigin(0.5);
-        this.add.text(centerX,centerY-100, "Click UP to fire bullet", menuConfig).setOrigin(0.5);
-        this.add.text(centerX,centerY-50, "Can fire 10 times max", menuConfig).setOrigin(0.5);
-        this.add.text(centerX,centerY, "How long can you survive", menuConfig).setOrigin(0.5);
+        //this.add.text(centerX,centerY-150, "", menuConfig).setOrigin(0.5);
+        this.add.text(centerX,centerY-120, "Press <- and -> to move left or right", menuConfig).setOrigin(0.5);
+        this.add.text(centerX,centerY-70, "Press UP to fire bullet up", menuConfig).setOrigin(0.5);
+        this.add.text(centerX,centerY-40, "can destroy an incoming Red Triangle", menuConfig).setOrigin(0.5);
+        this.add.text(centerX,centerY-10, "Can fire up to 10 times max", menuConfig).setOrigin(0.5);
+        this.add.text(centerX,centerY+40, "Avoid red triangles as long as you can", menuConfig).setOrigin(0.5);
         cursors = this.input.keyboard.createCursorKeys();
 
         

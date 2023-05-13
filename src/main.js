@@ -108,8 +108,6 @@ let keyLEFT, keyRIGHT, keyDOWN, keyUP, keySHIFT;
 //array for respawn
 let coordX = [centerX, centerX/3, centerX+(2*(centerX/3))];
 const squareVelocity = 50;
-console.log("centerX: "+centerX);
-console.log("centerY: "+centerY);
 //object
 let square = null;
 let bar = null;

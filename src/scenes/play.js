@@ -46,7 +46,6 @@ class Play extends Phaser.Scene {
 
     //Creating blue Square
     square = this.physics.add.sprite(centerX, centerY*1.8, 'bSquare2', 'l0_sprite_square01').setOrigin(0.5);
-    console.log("CenterY*1.8 = " + centerY*1.8 + ", CenterY*2.0 = "+ centerY*1.5);
     square.play("beat");
     square.setScale(3.5);
     square.setCollideWorldBounds(true);
@@ -148,7 +147,6 @@ class Play extends Phaser.Scene {
       this.physics.world.collide(this.triangleGroup, bar, this.barCrash, null, this);
       if(this.physics.world.collide(this.bulletGroup, this.triangleGroup, this.crash, null, this)){
         if(this.triangleGroup.getLength()==0){
-          console.log(this.triangleGroup.getLength());
           this.addTriangle();
         }     
       }

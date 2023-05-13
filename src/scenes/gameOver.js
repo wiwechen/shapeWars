@@ -22,7 +22,7 @@ class gameOver extends Phaser.Scene {
            
 
            this.add.text(centerX,centerY, "Game Over. You lasted: "+score+"s", gameOverConfig).setOrigin(0.5);
-           this.add.text(centerX,centerY+80, "High Score is: " +hsScore+"s", gameOverConfig).setOrigin(0.5);
+           this.add.text(centerX,centerY+40, "High Score is: " +hsScore+"s", gameOverConfig).setOrigin(0.5);
            this.add.text(centerX,centerY+140, "Click UP to retry", gameOverConfig).setOrigin(0.5);
            this.add.text(centerX,centerY+180, "Click DOWN for menu", gameOverConfig).setOrigin(0.5);
            cursors = this.input.keyboard.createCursorKeys();       
